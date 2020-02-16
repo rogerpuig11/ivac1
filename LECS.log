@@ -1,0 +1,352 @@
+;
+;   Control Radar LECS_CTR  (FIR LECM)
+;   Versi�n 1.00 for Pro Controller version 2.2 b5 r9
+;   by: Angel Alba � 1998 - 2004 /  meteo@alba90.com
+;   Marzo de 2004
+;
+;   Version 2.00 para IVAC
+;   por Luis Chamizo
+:   Mejora de version 1.00 actualizando fijos y aerovias, retocando el ARTCC e incluyendo SID/STAR de LEZL,LEJR Y LEMG
+;   ABRIL 2007
+;
+;   Versi�n 3.5 Fecha: Julio/2010
+;   por Juan Bosco Garc�a Guti�rrez
+;   A�adida nueva rodadura de LEJR con S-1.
+;   Eliminado punto S (visual) de Jerez
+;   Actualizadas m�nimas radar LEZL, LEMG, LEAM
+;   A�adido �rea 1 de Sevilla TMA en ARTCC LOW
+;   A�adida rodadura de LERL
+;   Nuevas SID de LEJR
+;
+;   Versi�n 4.0 Fecha Mayo/2011
+;   por Alberto Medina y Francisco Espinosa
+;   A�adidos fijos correspondientes a la actualizaci�n de Mayo/2011
+;   A�adidas nuevas aerov�as correspondientes a la actualizaci�n de Mayo/2011
+;   Peque�as correcciones
+;
+;   Versi�n 4.2 Fecha Febrero/2012
+;   por Alberto Medina
+;   Actualizados fijos en la zona de LEMG correspondientes a la actualizaci�n de Febrero/2012
+;   Actualizaci�n aerov�as A301 B95 R24 M445
+;   Actualizaci�n puntos VFR LEMG
+;   Actualizaci�n SID/STAR LEMG
+;
+;   Versi�n 4.3 Fecha Mayo/2012
+;   por Juan Pedro Sancho y Alberto Medina
+;   Actualizaci�n SID/STAR LEMG AIRAC03/12
+;   Incorporaci�n nueva pista LEMG AIRAC03/12
+;   Actualizaci�n plataforma,rodaduras, edificios LEMG AIRAC03/12
+;
+;
+;   Versi�n 4.5 Fecha Julio/2012
+;   por El�as Herrero
+;   Modificaci�n TMA de Sevilla y separaci�n del FIR en W y E
+;
+;   Versi�n 4.6 Fecha Julio/2012
+;   por Manuel Naranjo
+;   Incorporaci�n de la transici�n en ASTRO
+;
+;   Versi�n 4.7 fecha octubre/2012
+;   por Manuel Naranjo
+;   Incorporaci�n de nuevos fijos e incorporaci�n de aerov�as nocturnas.
+;   Delimitaci�n al OESTE con el ACC de LISBOA
+;
+;
+;   Versi�n 5 Febrero/2013
+;   Actualizaci�n de fijos y aerov�as.
+;   Inclusi�n zona parcialmente segregada ATLAS
+;   Inclusi�n zona de bloqueo para pista 31 en LEMG
+;
+;   Versi�n 5.1 mayo/2013
+;   por Manuel Naranjo
+;   Actualizaci�n del sector de m�nimas radar en el AD de LEMG
+;   Airac 04/13
+;
+;
+;   Versi�n 5.2 agosto/2013
+;   por Manuel Naranjo
+;   Incorporaci�n de los subsectores ASV y APN
+;
+;   Versi�n 5.3 agosto/2013
+;   por Manuel Naranjo
+;   Subsectores LECS_W y LECS_E (apartado SID)
+;   Versi�n 5.3.1. agosto/2013
+;   por Manuel Naranjo
+;   Incorporaci�n de Helipuerto sanitario privada (LEMB) - Marbella.
+;   A�adido tramo de aerov�a UZ180 (al l�mite del FIR de LECS)
+;   Versi�n 5.3.2. septiembre/2013
+;   por Manuel Naranjo
+;   Modificaci�n de las salidas e identificaci�n de salidas r�pidas en AD LEGR
+;
+;   Versi�n 5.3.3. noviembre/2013
+;   por Manuel Naranjo
+;   Modificaci�n de las salidas e identificaci�n de salidas r�pidas en AD LEGR, inclusi�n de punto USIBA. Inclusi�n punto de espera E2 en rodaje de LEZ;
+;   Versi�n 5.34 diciembre/2013
+;   por Manuel Naranjo
+;   Modificaci�n AIRAC 12/13, eliminaci�n de radio ayudas de LEAB y LEBZ. Inclusi�n Helipuerto Privado Sanitario Militar en C�diz LESF.
+;
+;   Versi�n 5.4 enero/2014
+;   Edici�n Antonio Prieto
+;   Rev. Manuel Naranjo
+;   Se ha procedido a rehacer todo el AD de LEMG mejorando la definici�n del sector, incluidos los parkings, calle de rodajes.
+;   inclusi�n de zonas LER
+;   A�adido detalle de LEAB (plataforma y taxy)
+;   Mejora AD LEAM
+;   Inclusi�n de parkings y plataforma Aeroclub de LEJR (AIRAC 14/13)
+;
+;   Versi�n 5.43 Octubre/2014
+;   Edici�n Alain Lejarraga
+;   Rev.
+;   Mejoras LEAB: Puntos VFR, Correcci�n CTA, SIDs, MRVA, Tacan TAB, Ajuste curso pistas, Corr. VFR Reactores Militares, Rutas Llegada/Salida Militares.
+;
+;   version 5.6 marzo/2015
+;   Edici�n Manuel Naranjo
+;	Rev: Nuevo Helipuerto C.I. Huelga// Modificaci�n de coordenadas estacionamientos 17 y 19 de LEZL
+;
+;   version 5.6.2 octubre/2015
+;   Edici�n Pedro Ur�n
+;	Rev: Incorppraci�n del punto visual SW LEAM.Se ha modificado el ATZ y el CTR de LEAM (AIRAC 10/15)
+;	Puntos ABSUM, BEPIL. Reestructuraci�n de la rampa R1 LEMG
+;
+;   version 5.6.3 enero/2016
+;   Edici�n Pedro Ur�n
+;	Rev: Incorppraci�n LEAB nuevo estacionamiento 1c (AIRAC 01/16)
+;	Inclusion PDC LEBA
+;
+;
+;   version 5.6.5 abril/2016
+;   Edici�n Pedro Ur�n
+;	Rev: Incorppraci�n del punto LUVIV (AIRAC 04/16)
+;	Inclusion aerivias UL58 y UL195
+;
+;   version 6.0 AGOSTO/2016
+;   Edici�n Pedro Ur�n
+;	Rev: Nuevas aerovias M372, UM372, M192, UM192, UT115 (AIRAC del 06 al 09 - 16)
+;	Puntos ESAMI, nuevo aerodromo LEVE
+;       Inclusion de la nueva sectorizacion LECS_S_CTR LECS_W_CTR LECS_E_CTR LECS_C_CTR
+;
+;   version 6.1 AGOSTO/2016
+;   Edici�n Alain Lejarraga
+;	Rev: Secci�n [INFO]:
+;       He centrado el sector a la altura, m�s o menos, de "BAENA", para que al cargar el sector la cobertura abarque desde el centro.
+;       He cambiado el AD principal a LEMG (que supongo que ser� el que m�s tr�fico tenga en IVAO, estaba puesto el de Almer�a).
+;       Ajustada la distancia relativa que equivale el grado de longitud a 48nm (estaba en 49). Esto es un detalle de proyecci�n de la ;     ;       superficie ;terrestre en el plano, no tiene mayor importancia.
+;
+;   Otras secciones:
+;       Corregido nombre de la aerovia R24 (estaba como R94).
+;       Alargada aerov�a A44 hasta TARIK (pico del SurEste).
+;
+;       Corregido sector LECS_C_CTR (le faltaba un pico al NorOeste). Resto de sectores de ruta correctos.
+;       He eliminado un sector "RADAR ALMA" que no se muy bien qu� pintaba ah�, posiblemente ser�a de alguna sectorizaci�n especial de alg�n ;       evento.
+;       He cambiado de nombre los sectores de Aproximaci�n, denomin�ndolos "TMA_xxxx_zzz", donde xxxx es el aer�dromo ppal. y zzz el ;       ;       subsector. De esta manera, aparecer�n al final de la lista "SID":
+;       -TMA_LEZL_APN --> Hab�a un l�mite lateral que no estaba dibujado (no se ve�a porque coincidia con otro sector), ya arreglado.
+;       -TMA_LEZL_APS --> Correcto
+;       -TMA_LEZL_ASV --> Correcto
+;       -TMA_LEMG --> No estaba dibujado, la he incorporado en SID.
+;       -He 'comentado' un sector denominado Sevilla VEJB que creo que finalmente no se va a incorporar en la nueva sectorizaci�n, pero la ; ;       dejo comentada por si acaso es necesario incorporarlo m�s adelante.
+;
+;
+;   version 7.1 AGOSTO/2016
+;   Edici�n Pedro Ur�n
+;	Rev:
+;       Inclusi�n VOR "AGP"
+;       Inclusi�n CTR Talavera (LEBZ)
+;       Inclusi�n TMA Almer�a (LEAM)
+;       Inclusi�n Llegadas STAR CCS1A y SVL1E a LEBZ
+;       FIX "LUVIV" e incluir en las aerovias implicadas. (esto ya estaba en la versi�n 6.0)
+;       Inclusi�n Rodaduras "CD" y "F" de LEMG (est�n identificadas pero sin dibujar)
+;       Cambio de estacionamientos en las rampas R3, R4 y R5
+;       Inclusi�n Taxiway "C" de GEML (Melilla)
+;       Divisi�n de las pesta�as CC, HS y LS de la siguiente manera:
+;          - CC para sectores de ruta
+;          - HS para TMA y CTA
+;          - LS para CTR y ATZ
+;       Quitar los l�mites del FIR de la pesta�a "GEO", ya que se encuentran en CC.
+;       Inclusi�n de M�nimas RADAR tanto en SID como en STAR.
+;
+;
+;   Version 7.2 SEPTIEMBRE/2016
+;   Edici�n Pedro Ur�n
+;	Rev:
+;       Nuevo CTR de Malaga redibujado
+;       Areas 3C t 3C LEAX TMA Sevilla
+;       Cambio de denominaci�n punto LEPES por OSLEP
+;           - Dibujar e incluir en R47
+;           - Sustituir LEPES por OSLEP e incluir en UN747 y UN858
+;       Nuevo punto significativo: PODES
+;       Nuevas aerov�as: UM999, UN493
+;       Cambio de denominaci�n de llegadas LEPES por OSLEP: LEPES2F -> OSLEP1F LEPES2E -> OSLEP1E LEPES2M -> OSLEP1M
+;       Nuevos puntos de notificaci�n VFR
+;
+;
+;   Version 7.4 OCTUBRE/2016
+;   Edici�n Pedro Ur�n
+;	Rev:
+;   - Nuevos puntos significativos: PISIG, TAVSI, XULIM.
+;   - Incluir �MIMDI� (necesario para aerovias T100, UT100, fuera de FIR) y GOSOS
+;
+;   - Inclusi�n de puntos significativos en aerovias:
+;        - XULIM, en AWYs G5, T100, UL27, UT100
+;        - TAVSI, en AWYs UL82, UT100
+;        - PISIG, en AWY UN871, UT100
+;   - Revisar aerovias T100 y UT100 entre AMPIR y MIMDI (LECB)
+;   - Correcci�n de taxiway C1-1 (aparece como C1-3)
+;   - Modificar Talavera CTR con frontera portuguesa
+;
+;
+;   Version 7.5 NOVIEMBRE/2016
+;   Edici�n Pedro Ur�n
+;	Rev:
+;        - Inclusi�n de Aerodromo AMR Sevilla (Utrera) LEUT
+;        - Inclusi�n de Aer�dromo Juan Espadafor (Granada) LEJE
+;        - Inclusi�n de Helipuerto Villahermosa (Ciudad Real) (HEL) LEVO
+;
+;        - Inclusi�n de puntos significativos en aerovias:
+;           - RISPO, en AWY UM143
+;           - AGIDO, en AWY UM192
+;           - DOSEK, en AWY UN860
+;           - ESILA, en AWY UN865
+;           - KUNEN, en AWY UT115
+;
+;        - Actualizacion parkings LEJR
+;           - P-A1 Inclusi�n 6A 8A H9 H10 11E
+;           - P-A3 Inclusi�n de stands del 30 al 49
+;
+;
+;   Version 7.6 FEBRERO/2017
+;   Edici�n Pedro Ur�n
+;	Rev:
+; 	Inclusi�n: LEAH Aer�dromo Aeroh�spalis-Mairena del Alcor 371946N 0054326W
+; 	Inclusi�n: LEOL Aer�dromo de Lorca (Murcia) 375538N 0014634W
+; 	Inclusi�n: LETX
+ Aer�dromo de Totana (Murcia) 374520N 0012650W
+; 	Inclusi�n: LELI Aer�dromo El Molinillo (Badajoz) 384430N 0062344W
+; 	Inclusi�n: LEMY Aer�dromo M�rida-Rayanejos (Badaloz) 385848N 0062043W
+;   Edici�n Alain Lejarraga
+	Eliminaci�n: LELI Aer�dromo de Linares (Ja�n)
+
+;   Version 7.7 MAYO/2017
+;   Edici�n Pedro Ur�n
+;	Rev:
+;   LEAM: Modificaci�n parking aviacion general
+;   LEMG: Modificaci�n parking Rampa 7
+;
+;
+;   Version 7.8 ABRIL/2017
+;   Edici�n Pedro Ur�n
+;	Rev: Alain Lejarraga
+;   LEAM: Inclusi�n de SID y STAR RNAV GNSS
+;    SID07: KUNEN1T ESILA1T AGIDO1T DOSEK1T RISPO1T
+;    SID25: VADAT1S KUNEN1S ESILA1S RISPO1S AGIDO1S DOSEK1S
+;    STAR25: VADAT1Q KUNEN1Q KUNEN1G ESILA1Q RISPO1Q AGIDO1Q DOSEK1Q
+;    STAR07: VADAT1R KUNEN1R ESILA1R RISPO1R AGIDO1R DOSEK1R
+;   NUEVOS IAF LEAM: MOLUV ELVEX
+;   NUEVO FIJO LEAM: ASNEP
+;
+;
+;   Version 7.9 JULIO/2017
+;   Edici�n Pedro Ur�n
+;   	Inclusi�n TSA290717 para evento SO Malaga 29 y 30 de julio
+;
+;
+;   Version 7.10 SEPTIEMBRE/2017
+;   Edici�n Pedro Ur�n
+;   	Baja del �Aer�dromo de Pozuelos de Calatrava (LEPZ)
+;       GEML Modificaci�n puestos estacionamiento
+;       Eliminar la TSA del pasado evento SO de M�laga si todav�a persiste
+;
+;
+;   Version 7.11 DICIEMBRE/2017
+;   Edici�n Pedro Ur�n
+;   	Eliminaci�n de todas las aerov�as nocturnas (UQ_)
+;
+;   Version 7.12 MARZO/2018
+;   Edici�n Pedro Ur�n
+;   	Inclusi�n de STAR LEMG RWY 31 VULPE1J
+;
+;
+;   Version 7.13 MAYO/2018
+;   Edici�n Pedro Ur�n
+;       L�mites horizontales LER164: Ajustar un poco m�s (sin ser necesario un detalle excesivo de la zona de l�nea de costa)
+;       LEBA: Eliminar ATZ y generar FIZ. Revisar umbrales de pista y longitud
+;
+;
+;   Version 7.14 JULIO/2018
+;   Edici�n Pedro Ur�n
+;       Inclusi�n: LEOA Nuevo aer�dromo El Moral (Badajoz)
+;
+;
+;   Version 7.15 SEPTIEMBRE/2018
+;   Edici�n Pedro Ur�n
+;       Inclusi�n: Nueva TWY H de rodaje a�reo para helic�pteros
+;                  SID rwy02: Nuevo designador VJF2Q
+;                  Pasillo VFR (Sevilla TMA �rea 7C) y punto de notificaci�n �G�
+;                  Revisi�n de MRVA (falta altitud en un sector de Sevilla)
+;
+;
+;   Version 7.15 NOVIEMBRE/2018
+;   Edici�n Pedro Ur�n
+;
+;                  LEZL Coordenadas de puesto de estacionamiento PRKG 01
+;
+;   Version 7.17 ENERO/2019
+;   Edici�n Pedro Ur�n
+;
+;                  LEZL Parking 15B
+;                  LEAM Nueva denominaci�n del punto de notificaci�n visual �SW�
+;                  LEAB Revisar puntos de notificaci�n visual
+;                  LEZL Nuevo punto EPIXI
+;                  LEZL Revisadas SID: SANTA2R, JIJ1R, SANTA3G,HIJ3G
+;                  LEZL A�adida STAR: BUDIT2R
+;
+;   Version 7.18 MARZO/2019
+;   Edici�n Pedro Ur�n
+;
+;                  Nuevos puntos significativos:  EPIXI, SOVIS
+;                  Eliminar puntos significativos:  GADOR, KALAB, LOJAS, ONDAL, RAKOR
+;                  Eliminaci�n, modificaci�n o adici�n de nuevas aerov�as:
+;                       Baja cota:  A44, B11, B28, B46, B95, G5, G53, H53, H230, H372, J865, B192, M372, N865, R24, R47, T100, V19, W810, Z230, M445
+;                       Alta cota:   UL27, UL112, UL195, UM30, UM445, UM744, UM985, UN747, UN865, UT100, UT115, UZ19, UZ53
+;                  Cambios en las SID/STAR de todos los aer�dromos. Revisar identificadores
+;   Version 7.19 AGOSTO/2019
+;   Edicion Jose Manuel Garcia
+;   Correcion TMA de Malaga a forma correspondiente a WebEye y realidad
+;   Revision y actualizacion total de fijos
+;   Revision y actualizacion total de VORs
+;   Revision y actualizacion total de NDBs
+;   Revision y actualizacion total de aerovias
+;   Correcion TMA de Sevilla
+;   Correcion TMA de Sevilla Area 1
+;   Correcion TMA de Sevilla Area 2
+;   Correcion TMA de Sevilla Area 3
+;   Correcion TMA de Sevilla Area 3B
+;   Correcion TMA de Sevilla Area 6
+;   Eliminación Jerez ATZ
+;   Correción Jerez CTR
+;   Eliminación Sevilla ATZ
+;   Nueva realizacion Sevilla CTR
+;   Nueva realizacion El Copero CTR
+;   Correccion LECS_E_CTR
+;   Correccion LECS_W_CTR
+;   Correccion LECS_S_CTR
+;   Correccion LECS_C_CTR
+;   Correccion Corredor de Melilla
+;
+;   Version 7.20 AGOSTO/2019
+;   Edicion Jose Manuel Garcia
+;   Traspaso de las taxiways de LEGR de FIXES a AIRPORTS.
+;   Inclusión de los puntos militares A1, A2, A3 y A4 pertenecientes al TMA de Sevilla.
+;   Actualización de puntos VFR de LERL.
+;   Actualización de puntos VFR de LEAO.
+;   Actualización de pistas rodaje de LERL.
+;
+;   Version 7.21 NOVIEMBRE/2019
+;   Edicion Jose Manuel Garcia
+;   Actualización TMA_LEMG con divisiones entre APP y DEP segun la configuracion del aeropuerto.
+;   Revision de las TWYs de LEZL.
+;   Actualización de las SIDs de LEAB.
+;
+;	Versión 7.23 Enero/2019
+;	Edición Elías Herrero
+;	Actualización 01/20
+;   Incorporación de aeródromos y helipuertos
