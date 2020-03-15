@@ -6,11 +6,54 @@
   Últimas modificaciones realizadas por Adrian Maximo (534081)
   
 ================  Sector CANARIAS RUTA -2020- ===============
-Actualizado a 25/02/2020
-
-Añadida nueva sectorización de IVAO (julio 2016)
+;v5.60: XX/02/2020 Perico el de los palotes (VID) AIRAC 01/20 -> LEEN, LEDI, LEDS, LEAF, LEFB added. LESA E-1 VRP coordinate change. LEZG Apron and parking update.
  
  
+;INDICE SECTOR ¿CÓMO ESTÁ DISTRIBUIDA LA INFORMACIÓN?
+; NOTA: TODA LA INFORMACIÓN DE CADA APARTADO ESTÁ DIVIDIDA EN CUATRO PARTES: OUT OF LECM MADRID SECTOR BORDERS, NW REGION, NE REGION y S REGION.
+;
+;-[INFO]: Información del sector (software).
+;
+;-[VOR]: Estaciones VOR, TACAN, DME y sus posibles combinaciones.
+;  -Nomenclatura: ABC 1ZZ.ZZZ N0XX.XX.XX.XXX W0YY.YY.YYY ;NOMBRE (ej. ADQ 114.300 N038.51.13.800 W003.58.14.400 ;Ciudad Real)
+;
+;-[NDB]: Estaciones NDB y puestos de estacionamiento.
+;  -Nomenclatura: ABCDE ZZZ.ZZZ N0XX.XX.XX.XXX W0YY.YY.YY.YYY ;NOMBRE (ej. AA    355.000 N040.26.53.559 W003.32.19.728 ;Madrid)
+;  -Puestos de estacionamiento: escribir el número de puesto de estacioamiento (máx 5 caracteres) y dejar frecuencia en blanco.
+;
+;-[AIRPORT]: Puntos de Referencia de Aeródromo (ARP) controlados y no controlados y nombres de calles de rodaje.
+;  -Nomenclatura: ICAO ZZZ.ZZZ N0XX.XX.XX.XXX W0YY.YY.YY.YYY ;NOMBRE (ej. LEHS 123.500 N043.17.18.000 W002.58.48.000 ;Crucesdel)
+;  -Calles de rodaje: escribir el nombre de la calle de rodaje (máx 5 caracteres) y dejar frecuencia en blanco.
+;
+;-[RUNWAY]: Pistas de cualquier aeródromo controlado o no controlado.
+;  -Nomenclatura: AAA BBB WWW ZZZ N0XX.XX.XX.XXX W0YY.YY.YY.YYY N0XX.XX.XX.XXX W0YY.YY.YY.YYY;NOMBRE (ej. 12  30  118 298 N043.18.22.850 W002.55.29.780 N043.17.51.730 W002.54.04.880 ;Bilbao)
+;  -Explicación: escribir designador de una pista, de pista contraria, curso final de una pista, curso final de pista contraria, coordenadas de umbral de una pista y coordenadas de umbral de pista contraria.
+;  -Pistas con ILS: rellenar WWW o ZZZ, según la pista que tenga ILS, con el curso final del localizador corregido para que coincida su derrota verdadera con la representada en el IVAC.
+;
+;-[FIXES]: Intersecciones (WPT) y puntos de notificación visual (VRP).
+;
+;-[LOW AIRWAY]: Aerovías de baja cota NOMBRE/PUNTO/REPETIR PUNTO(o espacios)/PUNTO/REPETIR PUNTO(o espacios)/
+;
+;-[SID]: Locura máxima de datos, separado por AD.
+;
+;-[STAR]: Lista de STAR, que incluye STAR, CDA y procedimientos militares.
+;  -Nomenclatura: LEXX_RWY_(MIL)_
+;  -MSA y MVA: Incluidas
+;
+;-[ARTCC]: Límites de FIR reales o divisionales y fronteras geográficas cuando aplicable
+;
+;-[ARTCC HIGH]: CTA's y TMA's
+;
+;-[ARTCC LOW]: CTR's y ATZ's
+;
+;-[GEO]: 
+;  -RUNWAYS: Pistas
+;  -STOPBARS: Punto de espera y puntos de espera intermedios
+;  -TAXIWAYS: Rodaduras y bordes de plataforma
+;  -RESTRICTED/PROHIBITED/DANGER ÁREAS
+;  -COAST LINE: Costa
+;  -BUILDINGS: Edificios
+;  -Approns: No utilizado
            
            
 
@@ -134,7 +177,7 @@ W             N028.04.45.000 W016.44.30.000
 
 
 [FIXES]
-N2324 N023.27.00.000 W024.17.00.000 
+N2324 N023.27.00.000 W024.17.00.000
 ADOVO N028.34.09.131 W013.47.34.226
 ALEDU N028.54.07.000 W013.20.41.100
 ALUGO N029.28.08.300 W013.00.28.300
@@ -830,6 +873,12 @@ GCLA/18                   N028.36.59.500 W017.45.19.500 N028.36.03.400 W017.45.1
 
                           N028.26.17.200 W017.27.43.780 ARACO          ARACO
                           ARACO          ARACO          TFS            TFS
+
+                          LARYS          LARYS          SARAY          SARAY         ;VASTO5U/SARAY1U
+                          SARAY          SARAY          VASTO          VASTO         
+
+
+
 
 ;-
 GCLA/36                   N028.38.10.760 W017.45.20.960 N028.38.14.500 W017.45.20.950
@@ -3067,6 +3116,8 @@ GCLP/03L                  N027.56.41.500 W015.22.51.500 ECKOS          ECKOS    
                           N028.05.09.398 W015.17.03.993 N028.05.13.220 W015.16.41.916
                           N028.05.13.220 W015.16.41.916 N028.05.15.426 W015.16.19.560
                           N028.05.15.426 W015.16.19.560 KOPUD          KOPUD
+
+
 ;-GCLP/03l GO/a
 GCLP/03L GO/A             N027.56.41.500 W015.22.50.400 N027.56.49.893 W015.22.46.759
                           N027.56.58.286 W015.22.43.117 N027.57.06.679 W015.22.39.476
@@ -4188,7 +4239,8 @@ GCXO/30                   N028.29.17.040 W016.21.28.280 N028.30.53.800 W016.26.1
                           N028.14.53.635 W017.07.16.566 N028.14.46.808 W017.07.06.475
                           
                           N028.14.46.808 W017.07.06.475 BAMEL          BAMEL
-                          BAMEL          BAMEL          TFS            TFS 
+                          BAMEL          BAMEL          TFS            TFS
+
 ;-GCXO/30 GO/A
 GCXO/30 GO/A              N028.29.17.040 W016.21.28.280 N028.29.19.169 W016.21.34.559
                           N028.29.21.298 W016.21.40.837 N028.29.23.426 W016.21.47.116
